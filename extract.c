@@ -21,8 +21,8 @@
 
 
 #define WAD_PARENT_FILENAME  "hotlinemiami_v1.0.9a-Linux_28-05-2013.tar.gz"
-#define WAD_FILENAME  "HotlineMiami_GL.wad"
-#define WAD_EXPECTED_SIZE_BYTES_A  497600150
+#define WAD_FILENAME  "hlm2_music_desktop.wad"
+#define WAD_EXPECTED_SIZE_BYTES_A  488239033
 #define WAD_EXPECTED_SIZE_BYTES_B  497702478
 
 // OGG header offsets from
@@ -75,31 +75,114 @@ void extract_file(const char * container, const char * file_start, const char * 
 }
 
 int main() {
-	// $ strings HotlineMiami_GL.wad | grep -Eo '^.+\.ogg' | sed 's|^Music/||'
+	// $ strings hlm2_music_desktop.wad | grep -Eo '^.+\.ogg' | sed 's|^Music/|| | sed -e 's/\(.*\)/"\1",/' > files.txt'
 	const char * const FILE_NAMES[] = {
-		"ANewMorning.ogg",
-		"Crush.ogg",
-		"Crystals.ogg",
-		"Daisuke.ogg",
-		"DeepCover.ogg",
-		"ElectricDreams.ogg",
-		"Flatline.ogg",
-		"HorseSteppin.ogg",
-		"Hotline.ogg",
-		"Hydrogen.ogg",
-		"InnerAnimal.ogg",
-		"ItsSafeNow.ogg",
-		"Knock.ogg",
-		"Miami2.ogg",
-		"Musikk2.ogg",
-		"Paris2.ogg",
-		"Perturbator.ogg",
-		"Release.ogg",
-		"SilverLights.ogg",
-		"Static.ogg",
-		"ToTheTop.ogg",
-		"TurfIntro.ogg",
-		"TurfMain.ogg",
+"Abyss.ogg",
+"AbyssIntro.ogg",
+"AcidSpit.ogg",
+"Around.ogg",
+"beams.ogg",
+"Benjamin.ogg",
+"BlackTar.ogg",
+"Blizzard.ogg",
+"Bloodline.ogg",
+"BurningCoals.ogg",
+"Decade.ogg",
+"Delay.ogg",
+"Detection.ogg",
+"Disturbance.ogg",
+"Divide.ogg",
+"Dubmood.ogg",
+"Dust.ogg",
+"evil.ogg",
+"Fahkeet.ogg",
+"Frantic.ogg",
+"FutureClub.ogg",
+"Ghost.ogg",
+"GuidedMeditation.ogg",
+"Hideout.ogg",
+"HollywoodHeights.ogg",
+"Hotline3.ogg",
+"HotlineTheme.ogg",
+"Interlude.ogg",
+"Java.ogg",
+"KeepCalm.ogg",
+"LePerv.ogg",
+"MiamiJam.ogg",
+"MsMinnie.ogg",
+"NARC.ogg",
+"NewWave.ogg",
+"Pursuit.ogg",
+"Quixotic.ogg",
+"Remorse.ogg",
+"Richard.ogg",
+"RollerMobster.ogg",
+"Rumble.ogg",
+"Run.ogg",
+"Rust.ogg",
+"Sexualizer.ogg",
+"SheMeditates.ogg",
+"SlumLord.ogg",
+"Technoir.ogg",
+"Videodrome.ogg",
+"voyager.ogg",
+"WayHome.ogg",
+"WouJuno.ogg",
+"YouAreTheBlood.ogg",
+"ZebraBackground.ogg",
+"Abyss.ogg",
+"AbyssIntro.ogg",
+"AcidSpit.ogg",
+"Around.ogg",
+"beams.ogg",
+"Benjamin.ogg",
+"BlackTar.ogg",
+"Blizzard.ogg",
+"Bloodline.ogg",
+"BurningCoals.ogg",
+"Decade.ogg",
+"Delay.ogg",
+"Detection.ogg",
+"Disturbance.ogg",
+"Divide.ogg",
+"Dubmood.ogg",
+"Dust.ogg",
+"evil.ogg",
+"Fahkeet.ogg",
+"Frantic.ogg",
+"FutureClub.ogg",
+"Ghost.ogg",
+"GuidedMeditation.ogg",
+"Hideout.ogg",
+"HollywoodHeights.ogg",
+"Hotline3.ogg",
+"HotlineTheme.ogg",
+"Interlude.ogg",
+"Java.ogg",
+"KeepCalm.ogg",
+"LePerv.ogg",
+"MiamiJam.ogg",
+"MsMinnie.ogg",
+"NARC.ogg",
+"NewWave.ogg",
+"Pursuit.ogg",
+"Quixotic.ogg",
+"Remorse.ogg",
+"Richard.ogg",
+"RollerMobster.ogg",
+"Rumble.ogg",
+"Run.ogg",
+"Rust.ogg",
+"Sexualizer.ogg",
+"SheMeditates.ogg",
+"SlumLord.ogg",
+"Technoir.ogg",
+"Videodrome.ogg",
+"voyager.ogg",
+"WayHome.ogg",
+"WouJuno.ogg",
+"YouAreTheBlood.ogg",
+"ZebraBackground.ogg"
 	};
 
 	const int fd = open(WAD_FILENAME, O_RDONLY);
@@ -113,10 +196,10 @@ int main() {
 
 	if ((props.st_size != WAD_EXPECTED_SIZE_BYTES_A)
 			&& (props.st_size != WAD_EXPECTED_SIZE_BYTES_B)) {
-		fprintf(stderr, "ERROR: Input file is neither %d nor %d bytes in size.  Ideally, grab \"%s\" from \"%s\".\n",
+		fprintf(stderr, "WARNING: Input file is neither %d nor %d bytes in size.  Ideally, grab \"%s\".\n",
 				WAD_EXPECTED_SIZE_BYTES_A, WAD_EXPECTED_SIZE_BYTES_B,
 				WAD_FILENAME, WAD_PARENT_FILENAME);
-		return 1;
+		//return 1;
 	}
 
 	char * const content = malloc(props.st_size + 1);
